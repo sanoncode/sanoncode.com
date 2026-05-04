@@ -17,13 +17,14 @@ My path hasn't been a straight line. At one point, I decided to take a break fro
 
 During that time, I realized how much I truly missed the thrill of **building things from scratch** and solving complex problems through code. I learned that my heart really belongs to software engineering. ❤️‍🔥
 
-So, **I’m back**—sharper, more focused, and fully committed to growing in the front-end space. 🚀
+So, **I’m back** sharper, more focused, and fully committed to growing in the front-end space. 🚀
 
 ### What I’m Up To Lately 🛠️
 
 I’ve been keeping myself busy with various personal projects to push my skills further:
-* **[Kiakia](https://kiakia-seven.vercel.app):** AI travel plan. ✈️
+* **[Kiakia](https://kiakia-seven.vercel.app):** AI travel plan. 🌴🏖️
 * **[Vocca](https://vocca.id):** Chat App that breaking language barrier. 💬
+* **[Importplus](https://t3-importplus-xi.vercel.app/):** A Simple Form with Dashboard for Forwarding Company. ⛴️
 
 
 ### Let's Connect! 🤝
