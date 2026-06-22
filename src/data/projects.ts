@@ -53,7 +53,7 @@ export const PROJECTS: Project[] = [
       "Focused on maintainability, scalability, and a clean user experience.",
     ],
     stack: ["Next.js", "PostgreSQL", "Drizzle ORM", "Tailwind CSS"],
-    url: "https://importplus.id",
+    url: "https://t3-importplus-xi.vercel.app/",
     featured: true,
   },
   {
