@@ -20,7 +20,6 @@ export const PROJECTS: Project[] = [
     description: [
       "Built a real-time chat application with automatic translation so users speaking different languages can communicate seamlessly.",
       "Implemented authentication, chat rooms, real-time messaging, and live user presence.",
-      "Designed responsive, user-friendly interfaces optimized for both desktop and mobile.",
     ],
     stack: ["Next.js", "TypeScript", "Supabase", "Zustand", "Tailwind CSS"],
     url: "https://vocca.id",

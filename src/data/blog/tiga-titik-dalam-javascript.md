@@ -1,7 +1,7 @@
 ---
 title: "Tiga Titik dalam Javascript"
 author: San Sebastian
-pubDatetime: 2019-09-14
+pubDatetime: 2026-09-25
 slug: tiga-titik-dalam-javascript
 featured: true
 draft: false

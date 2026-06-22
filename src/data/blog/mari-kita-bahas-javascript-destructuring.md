@@ -1,7 +1,7 @@
 ---
 title: "Mari kita bahas Javascript Destructuring"
 author: San Sebastian
-pubDatetime: 2022-03-15
+pubDatetime: 2026-03-15
 featured: true
 tags:
   - javascript
