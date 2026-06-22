@@ -6,55 +6,170 @@ import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
-import getSortedPosts from "@/utils/getSortedPosts";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import IconExternalLink from "@/assets/icons/IconExternalLink.svg";
+import getSortedPosts from "@/utils/getSortedPosts";
+import { PROJECTS } from "@/data/projects";
+import { EXPERIENCE } from "@/data/experience";
 import { SITE } from "@/config";
 import { SOCIALS } from "@/constants";
 
 const posts = await getCollection("blog");
-
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const latestPosts = sortedPosts.slice(0, 3);
+
+const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3);
+const currentRole = EXPERIENCE[0];
 ---
 
 <Layout>
   <Header />
   <main id="main-content" data-layout="index" class="app-layout">
-    <section id="hero" class:list={["pt-8 pb-6", "border-b border-border"]}>
-      <p class="text-lg font-light mb-1">Hi, my name is</p>
-      <h1 class="text-xl font-semibold sm:mb-8 sm:text-5xl">
-        San Sebastian
+    <!-- HERO -->
+    <section id="hero" class="pt-10 pb-12 border-b border-border sm:pt-16 sm:pb-16">
+      <p class="mb-2 text-lg font-light">Hi, my name is</p>
+      <h1 class="mb-4 text-4xl font-semibold sm:text-6xl">
+        Irsan Sebastian
         <span class="waving-emoji">👋</span>
       </h1>
-      <p class="mb-10">
-        Frontend Engineer focused on React and modern web tech ⚛️ <br>
-         I enjoy turning ideas into real products 🚀
+      <p class="mb-3 max-w-2xl text-xl font-medium sm:text-2xl">
+        I build fast, reliable web products with React &amp; Next.js.
+      </p>
+      <p class="mb-8 max-w-2xl text-muted">
+        Frontend / Full Stack Engineer focused on turning ideas into
+        production-ready SaaS, AI tools, and business platforms — with
+        clean code, solid performance, and a great user experience.
       </p>
 
+      <div class="mb-8 flex flex-wrap gap-3">
+        <a
+          href="/portfolio"
+          class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-background hover:opacity-90"
+        >
+          View my work
+          <IconArrowRight class="size-4 rtl:-rotate-180" />
+        </a>
+        <a
+          href="mailto:work@sanoncode.com"
+          class="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-medium hover:border-accent hover:text-accent"
+        >
+          Hire me
+        </a>
+        <a
+          href="/experience"
+          class="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-medium hover:border-accent hover:text-accent"
+        >
+          See experience
+        </a>
+      </div>
+
       {
-        // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+          <div class="flex max-sm:flex-col sm:items-center">
+            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Find me on:</div>
             <Socials />
           </div>
         )
       }
     </section>
 
+    <!-- QUICK STATS -->
+    <section class="grid grid-cols-2 gap-6 border-b border-border py-10 sm:grid-cols-4">
+      <div>
+        <p class="text-3xl font-semibold text-accent">3+</p>
+        <p class="text-sm text-muted">Years building for the web</p>
+      </div>
+      <div>
+        <p class="text-3xl font-semibold text-accent">{PROJECTS.length}+</p>
+        <p class="text-sm text-muted">Shipped products</p>
+      </div>
+      <div>
+        <p class="text-3xl font-semibold text-accent">3</p>
+        <p class="text-sm text-muted">Companies worked with</p>
+      </div>
+      <div>
+        <p class="text-3xl font-semibold text-accent">React</p>
+        <p class="text-sm text-muted">Next.js · TypeScript</p>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS -->
+    <section id="featured-projects" class="border-b border-border py-12">
+      <div class="mb-6 flex items-center justify-between">
+        <h2 class="text-2xl font-semibold tracking-wide">Featured Work</h2>
+        <LinkButton href="/portfolio">
+          All projects
+          <IconArrowRight class="inline-block size-4 rtl:-rotate-180" />
+        </LinkButton>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {
+          featuredProjects.map(project => (
+            <article class="flex flex-col justify-between rounded-lg border border-border p-5 transition-colors hover:border-accent">
+              <div>
+                <h3 class="mb-2 text-lg font-semibold">{project.title}</h3>
+                <p class="mb-4 text-sm text-muted">{project.summary}</p>
+                <div class="mb-4 flex flex-wrap gap-2">
+                  {project.stack.slice(0, 3).map(tech => (
+                    <span class="rounded-full border border-border px-2.5 py-0.5 text-xs text-muted">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              {project.url && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 text-sm text-accent decoration-dashed underline-offset-4 hover:underline"
+                >
+                  Visit project
+                  <IconExternalLink class="size-3.5" />
+                </a>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- CURRENT FOCUS / EXPERIENCE TEASER -->
+    <section class="border-b border-border py-12">
+      <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+        <div>
+          <h2 class="mb-2 text-2xl font-semibold tracking-wide">
+            Open to new opportunities
+          </h2>
+          <p class="max-w-xl text-muted">
+            Most recently a <span class="font-medium">{currentRole.role}</span> at
+            <span class="font-medium"> {currentRole.company}</span>. I'm
+            currently looking for roles where I can build great products with
+            a great team — remote-friendly and open to US/global teams.
+          </p>
+        </div>
+        <LinkButton href="/experience" class="shrink-0">
+          Full experience
+          <IconArrowRight class="inline-block size-4 rtl:-rotate-180" />
+        </LinkButton>
+      </div>
+    </section>
+
+    <!-- LATEST BLOG POSTS -->
     {
-      featuredPosts.length > 0 && (
-        <section
-          id="featured"
-          class:list={[
-            "pt-12 pb-6",
-            { "border-b border-border": recentPosts.length > 0 },
-          ]}
-        >
-          <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
+      latestPosts.length > 0 && (
+        <section id="latest-posts" class="py-12">
+          <div class="mb-2 flex items-center justify-between">
+            <h2 class="text-2xl font-semibold tracking-wide">
+              From the Blog
+            </h2>
+            <LinkButton href="/posts/">
+              All posts
+              <IconArrowRight class="inline-block size-4 rtl:-rotate-180" />
+            </LinkButton>
+          </div>
           <ul>
-            {featuredPosts.map(data => (
+            {latestPosts.map(data => (
               <Card variant="h3" {...data} />
             ))}
           </ul>
@@ -62,26 +177,20 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       )
     }
 
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
-          <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} />
-            )}
-          </ul>
-        </section>
-      )
-    }
-
-    <div class="my-8 text-center">
-      <LinkButton href="/posts/">
-        All Posts
-        <IconArrowRight class="inline-block rtl:-rotate-180" />
-      </LinkButton>
-    </div>
+    <!-- FINAL CTA -->
+    <section class="border-t border-border py-12 text-center">
+      <h2 class="mb-2 text-2xl font-semibold">Let's build something great</h2>
+      <p class="mx-auto mb-6 max-w-xl text-muted">
+        Whether it's a new product, a frontend overhaul, or a full-stack
+        feature — I'd love to hear about it.
+      </p>
+      <a
+        href="mailto:work@sanoncode.com"
+        class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-background hover:opacity-90"
+      >
+        Get in touch
+      </a>
+    </section>
   </main>
   <Footer />
 </Layout>

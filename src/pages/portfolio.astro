@@ -1,0 +1,125 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import IconExternalLink from "@/assets/icons/IconExternalLink.svg";
+import { PROJECTS } from "@/data/projects";
+import { SITE } from "@/config";
+
+const featured = PROJECTS.filter(p => p.featured);
+const others = PROJECTS.filter(p => !p.featured);
+---
+
+<Layout
+  title={`Portfolio | ${SITE.title}`}
+  description="Selected products and platforms built by Irsan Sebastian — React, Next.js, and modern web engineering."
+>
+  <Header />
+  <main id="main-content" class="app-layout">
+    <section class="pt-8 pb-6 border-b border-border">
+      <p class="text-lg font-light mb-1">Selected work</p>
+      <h1 class="text-3xl font-semibold sm:text-5xl mb-4">Portfolio</h1>
+      <p class="max-w-2xl text-muted">
+        A few products I've designed and shipped end-to-end, from idea to
+        production — spanning SaaS, AI tooling, and internal business
+        platforms.
+      </p>
+    </section>
+
+    <section class="pt-10 pb-6">
+      <div class="grid gap-6 sm:grid-cols-2">
+        {
+          featured.map(project => (
+            <article class="group flex flex-col justify-between rounded-lg border border-border p-5 transition-colors hover:border-accent">
+              <div>
+                <div class="mb-2 flex items-center justify-between gap-2">
+                  <h2 class="text-xl font-semibold">{project.title}</h2>
+                  <span class="shrink-0 text-sm text-muted">{project.period}</span>
+                </div>
+                <p class="mb-4 text-muted">{project.summary}</p>
+                <ul class="mb-4 list-disc space-y-1 ps-5 text-sm">
+                  {project.description.map(line => <li>{line}</li>)}
+                </ul>
+                <div class="mb-4 flex flex-wrap gap-2">
+                  {project.stack.map(tech => (
+                    <span class="rounded-full border border-border px-2.5 py-0.5 text-xs text-muted">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              {project.url && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 text-accent decoration-dashed underline-offset-4 hover:underline"
+                >
+                  Visit project
+                  <IconExternalLink class="size-4" />
+                </a>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      others.length > 0 && (
+        <section class="border-t border-border pt-10 pb-12">
+          <h2 class="mb-6 text-2xl font-semibold tracking-wide">
+            Other projects
+          </h2>
+          <div class="grid gap-6 sm:grid-cols-2">
+            {others.map(project => (
+              <article class="flex flex-col justify-between rounded-lg border border-border p-5 transition-colors hover:border-accent">
+                <div>
+                  <div class="mb-2 flex items-center justify-between gap-2">
+                    <h3 class="text-lg font-semibold">{project.title}</h3>
+                    <span class="shrink-0 text-sm text-muted">
+                      {project.period}
+                    </span>
+                  </div>
+                  <p class="mb-3 text-muted">{project.summary}</p>
+                  <div class="mb-3 flex flex-wrap gap-2">
+                    {project.stack.map(tech => (
+                      <span class="rounded-full border border-border px-2.5 py-0.5 text-xs text-muted">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {project.url && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 text-accent decoration-dashed underline-offset-4 hover:underline"
+                  >
+                    Visit project
+                    <IconExternalLink class="size-4" />
+                  </a>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="border-t border-border py-10 text-center">
+      <h2 class="mb-2 text-2xl font-semibold">Have a project in mind?</h2>
+      <p class="mb-6 text-muted">
+        I'm open to new opportunities and freelance collaborations.
+      </p>
+      <a
+        href="mailto:work@sanoncode.com"
+        class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-background hover:opacity-90"
+      >
+        Let's talk
+      </a>
+    </section>
+  </main>
+  <Footer />
+</Layout>
