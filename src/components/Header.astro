@@ -67,7 +67,7 @@ const isActive = (path: string) => {
       <ul
         id="menu-items"
         class:list={[
-          "mt-4 grid w-44 grid-cols-2 place-content-center gap-2",
+          "mt-4 grid w-56 grid-cols-2 place-content-center gap-2",
           "[&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium [&>li>a]:hover:text-accent sm:[&>li>a]:px-2 sm:[&>li>a]:py-1",
           "hidden",
           "sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0",
@@ -75,14 +75,25 @@ const isActive = (path: string) => {
       >
         <li class="col-span-2">
           <a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>
-            Posts
+            Blog
           </a>
         </li>
-        <!-- <li class="col-span-2">
-          <a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>
-            Tags
+        <li class="col-span-2">
+          <a
+            href="/portfolio"
+            class:list={{ "active-nav": isActive("/portfolio") }}
+          >
+            Portfolio
           </a>
-        </li> -->
+        </li>
+        <li class="col-span-2">
+          <a
+            href="/experience"
+            class:list={{ "active-nav": isActive("/experience") }}
+          >
+            Experience
+          </a>
+        </li>
         <li class="col-span-2">
           <a href="/about" class:list={{ "active-nav": isActive("/about") }}>
             About

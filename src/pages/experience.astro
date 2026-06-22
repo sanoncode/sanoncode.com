@@ -1,0 +1,108 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import IconBriefcase from "@/assets/icons/IconBriefcase.svg";
+import { EXPERIENCE, EDUCATION, SKILLS } from "@/data/experience";
+import { SITE } from "@/config";
+---
+
+<Layout
+  title={`Experience | ${SITE.title}`}
+  description="Professional experience, education, and technical skills of Irsan Sebastian, Frontend / Full Stack Engineer."
+>
+  <Header />
+  <main id="main-content" class="app-layout">
+    <section class="pt-8 pb-6 border-b border-border">
+      <p class="text-lg font-light mb-1">My background</p>
+      <h1 class="text-3xl font-semibold sm:text-5xl mb-4">Experience</h1>
+      <p class="max-w-2xl text-muted">
+        Frontend Engineer with hands-on experience building user-facing
+        products for startups and manufacturing companies, from early career
+        QA work to shipping production React/Next.js apps today.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
+          href="mailto:work@sanoncode.com"
+          class="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-medium text-background hover:opacity-90"
+        >
+          Contact me
+        </a>
+        <a
+          href="https://www.linkedin.com/in/sanoncode/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 font-medium hover:border-accent hover:text-accent"
+        >
+          View LinkedIn
+        </a>
+      </div>
+    </section>
+
+    <section class="pt-10 pb-6">
+      <h2 class="mb-6 flex items-center gap-2 text-2xl font-semibold tracking-wide">
+        <IconBriefcase class="size-6" />
+        Work History
+      </h2>
+      <ol class="relative space-y-10 border-s border-border ps-6">
+        {
+          EXPERIENCE.map(job => (
+            <li class="relative">
+              <span class="absolute -start-[29px] top-1.5 size-3 rounded-full bg-accent" />
+              <div class="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+                <h3 class="text-lg font-semibold">{job.role}</h3>
+                <span class="text-sm text-muted">{job.period}</span>
+              </div>
+              <p class="mb-2 font-medium text-accent">{job.company}</p>
+              <ul class="list-disc space-y-1 ps-5 text-sm text-muted">
+                {job.points.map(point => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="border-t border-border pt-10 pb-6">
+      <h2 class="mb-6 text-2xl font-semibold tracking-wide">Education</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          EDUCATION.map(edu => (
+            <div class="rounded-lg border border-border p-5">
+              <div class="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+                <h3 class="font-semibold">{edu.school}</h3>
+                <span class="text-sm text-muted">{edu.period}</span>
+              </div>
+              <p class="text-muted">{edu.program}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="border-t border-border pt-10 pb-12">
+      <h2 class="mb-6 text-2xl font-semibold tracking-wide">
+        Technical Skills
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          SKILLS.map(group => (
+            <div>
+              <h3 class="mb-2 font-medium text-muted">{group.label}</h3>
+              <div class="flex flex-wrap gap-2">
+                {group.skills.map(skill => (
+                  <span class="rounded-full border border-border px-3 py-1 text-sm">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
